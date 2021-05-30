@@ -3,6 +3,8 @@ import './homepage.css';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
 import {Avatar} from '@material-ui/core';
+import {googleProvider} from '../../config/authMethods';
+import socialMediaAuth from '../../service/auth';
 const useStyles = makeStyles((theme) => ({
   buttonStyle: {
     width: '50%',
@@ -14,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function HomePage() {
+  const handleOnClick = async (provider) => {
+    const res = await socialMediaAuth(provider);
+    console.log(res);
+  };
   const classes = useStyles();
   return (
     <div className="homepage">
@@ -33,6 +39,7 @@ function HomePage() {
         SIGN-IN WITH G-MAIL AND PASSWORD
       </Button>
       <Button
+        onClick={() => handleOnClick(googleProvider)}
         variant="outlined"
         color="primary"
         className={classes.buttonStyle}
